@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+instance/
+.webassets-cache
+.env
+venv/
+.env/
+*.egg-info/
+*.idea/
+*.vscode/
+static/uploads/

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Image</title>
+</head>
+
+<body>
+    <h1>Edit Image (Replace) - ID: {{ image_id }}</h1>
+    <a href="{{ url_for('index') }}">Back to List</a>
+    <br><br>
+    <img src="{{ url_for('static', filename='uploads/' + filename) }}" width="200">
+    <br><br>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Select new image to replace:</label><br>
+        <input type="file" name="image" accept="image/*" required>
+        <br><br>
+        <input type="submit" value="Update Image">
+    </form>
+</body>
+
+</html>

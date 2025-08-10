@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>YOLO Object Detection CRUD</title>
+</head>
+
+<body>
+    <h1>Uploaded Images with Detected Objects</h1>
+    <a href="{{ url_for('upload_image') }}">Upload New Image</a>
+    <br><br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>Image</th>
+            <th>Detected Objects</th>
+            <th>Actions</th>
+        </tr>
+        {% for image in images %}
+        <tr>
+            <td><img src="{{ url_for('static', filename='uploads/' + image.filename) }}" width="150"></td>
+            <td>
+                <ul>
+                    {% for det in image.detections %}
+                    <li>{{ det.label }} ({{ '%.2f'|format(det.confidence * 100) }}%)</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <form action="{{ url_for('delete_image', image_id=image.id) }}" method="POST" style="display:inline;">
+                    <button type="submit"
+                        onclick="return confirm('Are you sure you want to delete this image?')">Delete</button>
+                </form>
+                <a href="{{ url_for('edit_image', image_id=image.id) }}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
